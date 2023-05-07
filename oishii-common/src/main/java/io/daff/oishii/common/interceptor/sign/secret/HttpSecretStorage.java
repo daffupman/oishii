@@ -31,7 +31,7 @@ public class HttpSecretStorage implements SecretStorage {
         if (!StringUtil.hasText(appCode)) {
             return Strings.EMPTY;
         }
-        AppInfoVO targetAppInfo = appInfoLoader.getByCode(appCode);
+        AppInfoVO targetAppInfo = appInfoLoader.get(appCode);
         return targetAppInfo == null ? Strings.EMPTY : targetAppInfo.getSecret();
     }
 }

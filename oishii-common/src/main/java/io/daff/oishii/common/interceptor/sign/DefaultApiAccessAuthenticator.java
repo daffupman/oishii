@@ -33,7 +33,7 @@ public class DefaultApiAccessAuthenticator implements ApiAccessAuthenticator {
         // 取密钥
         String secret = secretStorage.getSecretByAppCode(signature.getAppCode());
         if (secret == null) {
-            throw new ParamValidateException("无效的app_id");
+            throw new ParamValidateException("无效的appcode");
         }
 
         // 验签
