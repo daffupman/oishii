@@ -1,4 +1,4 @@
-package io.daff.oishii.cms.controller;
+package io.daff.oishii.cms.api;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/merchant")
-public class MerchantController {
+public class MerchantApi {
 }

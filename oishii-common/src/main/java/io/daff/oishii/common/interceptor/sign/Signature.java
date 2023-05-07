@@ -108,25 +108,16 @@ public class Signature {
         private Map<String, Object> bizParams;
 
         public Builder appCode(String appCode) {
-            if (!StringUtil.hasText(appCode)) {
-                throw new ParamValidateException("app code is null");
-            }
             this.appCode = appCode;
             return this;
         }
 
         public Builder timestamp(String timestampStr) {
-            if (timestampStr == null || !StringUtil.isLong(timestampStr)) {
-                throw new ParamValidateException("timestamp is null");
-            }
-            this.timestamp = Long.valueOf(timestampStr);
+            this.timestamp = StringUtil.isEmpty(timestampStr) ? null : Long.valueOf(timestampStr);
             return this;
         }
 
         public Builder rawSignature(String rawSignature) {
-            if (!StringUtil.hasText(rawSignature)) {
-                throw new ParamValidateException("signature is null");
-            }
             this.rawSignature = rawSignature;
             return this;
         }
@@ -146,13 +137,13 @@ public class Signature {
         }
 
         public Signature build() {
-            if (!StringUtil.hasText(appCode)) {
-                throw new ParamValidateException("app_id is null");
+            if (!Objects.equals(debug, true) && !StringUtil.hasText(appCode)) {
+                throw new ParamValidateException("appcode is null");
             }
-            if (timestamp == null) {
+            if (!Objects.equals(debug, true) && timestamp == null) {
                 throw new ParamValidateException("timestamp is null");
             }
-            if (!StringUtil.hasText(rawSignature)) {
+            if (!Objects.equals(debug, true) && !StringUtil.hasText(rawSignature)) {
                 throw new ParamValidateException("signature is null");
             }
             return new Signature(this);

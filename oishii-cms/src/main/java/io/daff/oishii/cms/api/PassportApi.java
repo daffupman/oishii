@@ -1,4 +1,4 @@
-package io.daff.oishii.cms.controller;
+package io.daff.oishii.cms.api;
 
 import io.daff.oishii.cms.entity.param.SignInParam;
 import io.daff.oishii.cms.entity.vo.SignInVO;
@@ -20,7 +20,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/passport")
-public class PassportController {
+public class PassportApi {
 
     @Resource
     private PassportService passportService;

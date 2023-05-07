@@ -1,4 +1,4 @@
-package io.daff.oishii.cms.handler;
+package io.daff.oishii.common.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.daff.logging.DaffLogger;

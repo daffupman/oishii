@@ -1,4 +1,4 @@
-package io.daff.oishii.cms.controller;
+package io.daff.oishii.cms.api;
 
 import io.daff.oishii.cms.entity.vo.StaffVO;
 import io.daff.oishii.cms.service.StaffService;
@@ -19,7 +19,7 @@ import javax.validation.constraints.NotBlank;
  */
 @RestController
 @RequestMapping("/staff")
-public class StaffController {
+public class StaffApi {
 
     @Resource
     private StaffService staffService;
