@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <modules>
+    <module>oishii-cms</module>
+      <module>oishii-common</module>
+      <module>oishii-member</module>
+  </modules>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.0.RELEASE</version>
+    <relativePath />
+  </parent>
+
+  <groupId>io.daff</groupId>
+  <artifactId>oishii</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <properties>
+    <local.version>1.0.0-SNAPSHOT</local.version>
+    <project.build.source.encoding>UTF-8</project.build.source.encoding>
+    <project.reporting.output.encoding>UTF-8</project.reporting.output.encoding>
+    <java.version>1.8</java.version>
+    <daff.version>1.1.0-SNAPSHOT</daff.version>
+    <mapstruct.version>1.5.4.Final</mapstruct.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>2.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.22</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.10</version>
+    </dependency>
+    <dependency>
+      <groupId>io.daff</groupId>
+      <artifactId>logging</artifactId>
+      <version>${daff.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.daff</groupId>
+      <artifactId>web</artifactId>
+      <version>${daff.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.daff</groupId>
+      <artifactId>valid</artifactId>
+      <version>${daff.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.daff</groupId>
+      <artifactId>cache</artifactId>
+      <version>${daff.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.daff</groupId>
+      <artifactId>utils</artifactId>
+      <version>${daff.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>${mapstruct.version}</version>
+    </dependency>
+  </dependencies>
+
+</project>
