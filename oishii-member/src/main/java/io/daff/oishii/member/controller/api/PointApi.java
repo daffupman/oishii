@@ -1,4 +1,4 @@
-package io.daff.oishii.member.api;
+package io.daff.oishii.member.controller.api;
 
 import io.daff.web.entity.Response;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023/5/2
  */
 @RestController
-@RequestMapping("/test")
-public class TestApi {
+@RequestMapping("/point")
+public class PointApi {
 
     @RequestMapping("/hello")
     public Response<String> hello() {

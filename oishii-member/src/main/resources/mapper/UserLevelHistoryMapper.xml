@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.daff.oishii.member.mapper.UserLevelHistoryMapper">
+    <resultMap id="BaseResultMap" type="io.daff.oishii.member.entity.po.UserLevelHistoryPO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_code" jdbcType="VARCHAR" property="userCode"/>
+        <result column="level_code" jdbcType="VARCHAR" property="levelCode"/>
+        <result column="point_left" jdbcType="INTEGER" property="pointLeft"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_at" jdbcType="TIMESTAMP" property="createAt"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_at" jdbcType="TIMESTAMP" property="updateAt"/>
+        <result column="change_at" jdbcType="TIMESTAMP" property="changeAt"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_code, level_code, point_left, `status`, create_by, create_at, update_by,
+        update_at, change_at
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_level_history
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectLevelByUserCode" resultType="io.daff.oishii.member.entity.vo.UserLevelInfoVO">
+        select user_code userCode,
+        level_code levelCode,
+        point_left points,
+        create_at upgradeTime
+        from user_level_history
+        where user_code = #{userCode}
+        and status = 1
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from user_level_history
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="io.daff.oishii.member.entity.po.UserLevelHistoryPO" useGeneratedKeys="true">
+        insert into user_level_history (user_code, level_code, point_left,
+        `status`, create_by, create_at,
+        update_by, update_at, change_at
+        )
+        values (#{userCode,jdbcType=VARCHAR}, #{levelCode,jdbcType=VARCHAR}, #{pointLeft,jdbcType=INTEGER},
+        #{status,jdbcType=CHAR}, #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=VARCHAR}, #{updateAt,jdbcType=TIMESTAMP}, #{changeAt,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="io.daff.oishii.member.entity.po.UserLevelHistoryPO" useGeneratedKeys="true">
+        insert into user_level_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userCode != null">
+                user_code,
+            </if>
+            <if test="levelCode != null">
+                level_code,
+            </if>
+            <if test="pointLeft != null">
+                point_left,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+            <if test="changeAt != null">
+                change_at,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userCode != null">
+                #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="levelCode != null">
+                #{levelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="pointLeft != null">
+                #{pointLeft,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="changeAt != null">
+                #{changeAt,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="io.daff.oishii.member.entity.po.UserLevelHistoryPO">
+        update user_level_history
+        <set>
+            <if test="userCode != null">
+                user_code = #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="levelCode != null">
+                level_code = #{levelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="pointLeft != null">
+                point_left = #{pointLeft,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="changeAt != null">
+                change_at = #{changeAt,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="io.daff.oishii.member.entity.po.UserLevelHistoryPO">
+        update user_level_history
+        set user_code = #{userCode,jdbcType=VARCHAR},
+        level_code = #{levelCode,jdbcType=VARCHAR},
+        point_left = #{pointLeft,jdbcType=INTEGER},
+        `status` = #{status,jdbcType=CHAR},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=VARCHAR},
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+        change_at = #{changeAt,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

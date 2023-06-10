@@ -1,4 +1,4 @@
-package io.daff.oishii.cms.api;
+package io.daff.oishii.cms.controller.api;
 
 import io.daff.oishii.cms.entity.vo.StaffVO;
 import io.daff.oishii.cms.service.StaffService;

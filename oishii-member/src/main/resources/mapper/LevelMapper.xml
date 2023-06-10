@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.daff.oishii.member.mapper.LevelMapper">
+    <resultMap id="BaseResultMap" type="io.daff.oishii.member.entity.po.LevelPO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="level_code" jdbcType="VARCHAR" property="levelCode"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_at" jdbcType="TIMESTAMP" property="createAt"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_at" jdbcType="TIMESTAMP" property="updateAt"/>
+        <result column="change_at" jdbcType="TIMESTAMP" property="changeAt"/>
+    </resultMap>
+    <resultMap id="levelBenefitResultMap" type="io.daff.oishii.member.entity.vo.LevelBenefitsVO">
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="merchant_code" property="merchantCode"/>
+        <result column="points" property="points"/>
+        <result column="sort" property="sort"/>
+        <collection property="benefits" ofType="io.daff.oishii.member.entity.vo.BenefitsVO">
+            <result property="name" column="benefit_name"/>
+            <result property="code" column="benefit_code"/>
+            <result property="description" column="description"/>
+            <result property="sort" column="benefit_sort"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, code, `name`, description, sort, `status`, level_code, create_by, create_at,
+        update_by, update_at, change_at
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from benefit
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByMerchantCode" resultMap="levelBenefitResultMap">
+        select l.merchant_code merchantCode,
+        l.code,
+        l.name,
+        l.points,
+        l.sort,
+        b.code benefit_code,
+        b.name benefit_name,
+        b.description,
+        b.sort benefit_sort
+        from level l
+        left join benefit b on l.code = b.level_code and b.status = 1
+        where l.status = 1
+        and merchant_code = #{merchantCode}
+        order by l.sort, b.sort
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from benefit
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="io.daff.oishii.member.entity.po.LevelPO"
+            useGeneratedKeys="true">
+        insert into benefit (code, `name`, description,
+        sort, `status`, level_code,
+        create_by, create_at, update_by,
+        update_at, change_at)
+        values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+        #{sort,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{levelCode,jdbcType=VARCHAR},
+        #{createBy,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+        #{updateAt,jdbcType=TIMESTAMP}, #{changeAt,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="io.daff.oishii.member.entity.po.LevelPO"
+            useGeneratedKeys="true">
+        insert into benefit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="levelCode != null">
+                level_code,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+            <if test="changeAt != null">
+                change_at,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="levelCode != null">
+                #{levelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="changeAt != null">
+                #{changeAt,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="io.daff.oishii.member.entity.po.LevelPO">
+        update benefit
+        <set>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=CHAR},
+            </if>
+            <if test="levelCode != null">
+                level_code = #{levelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="changeAt != null">
+                change_at = #{changeAt,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="io.daff.oishii.member.entity.po.LevelPO">
+        update benefit
+        set code = #{code,jdbcType=VARCHAR},
+        `name` = #{name,jdbcType=VARCHAR},
+        description = #{description,jdbcType=VARCHAR},
+        sort = #{sort,jdbcType=INTEGER},
+        `status` = #{status,jdbcType=CHAR},
+        level_code = #{levelCode,jdbcType=VARCHAR},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=VARCHAR},
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+        change_at = #{changeAt,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

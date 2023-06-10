@@ -1,4 +1,4 @@
-package io.daff.oishii.member;
+package io.daff.oishii.product;
 
 import io.daff.cache.BizDataLoader;
 import io.daff.cache.PreCacheDataExecutor;
@@ -21,19 +21,19 @@ import java.util.List;
  * @author daff
  * @since 2023/4/30
  */
-@SpringBootApplication(scanBasePackages = {"io.daff.oishii.member", "io.daff.oishii.common"})
+@SpringBootApplication(scanBasePackages = {"io.daff.oishii.product", "io.daff.oishii.common"})
 @MapperScan(basePackages = {"io.daff.oishii.member.mapper"})
-@EnableFeignClients(basePackages = {"io.daff.oishii.member", "io.daff.oishii.common"})
+@EnableFeignClients(basePackages = {"io.daff.oishii.product", "io.daff.oishii.common"})
 @Import({HibernateValidatorConfig.class, WebInterceptorsConfig.class})
-public class OiShiiMemberApplication implements CommandLineRunner {
+public class OiShiiProductApplication implements CommandLineRunner {
 
-    private static final DaffLogger logger = DaffLogger.getLogger(OiShiiMemberApplication.class);
+    private static final DaffLogger logger = DaffLogger.getLogger(OiShiiProductApplication.class);
 
     @Resource
     private List<BizDataLoader<?,?>> bizDataLoaders;
 
     public static void main(String[] args) {
-        SpringApplication.run(OiShiiMemberApplication.class, args);
+        SpringApplication.run(OiShiiProductApplication.class, args);
     }
 
     @Override

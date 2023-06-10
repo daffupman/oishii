@@ -1,4 +1,4 @@
-package io.daff.oishii.cms.provider;
+package io.daff.oishii.cms.controller.provider;
 
 import io.daff.oishii.cms.entity.vo.AppInfoVO;
 import io.daff.oishii.cms.service.AppInfoService;
