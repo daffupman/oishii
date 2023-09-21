@@ -39,13 +39,13 @@ public class SignatureInterceptor extends HandlerInterceptorAdapter {
         Parameter[] parameters = handlerMethod.getMethod().getParameters();
         Map<String, Object> params = flatParams(parameters);
 
+        // 验证签名
         Signature signature = new Signature.Builder().appCode(request.getHeader(Signature.HEADER_APP_CODE))
                 .timestamp(request.getHeader(Signature.HEADER_TIMESTAMP))
                 .rawSignature(request.getHeader(Signature.HEADER_SIGNATURE))
                 .debug(request.getHeader(Signature.HEADER_DEBUG))
                 .bizParams(params)
                 .build();
-        // 验证
         apiAccessAuthenticator.auth(signature);
 
         return true;

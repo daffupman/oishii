@@ -1,6 +1,6 @@
 package io.daff.oishii.member.controller.provider;
 
-import io.daff.web.entity.Response;
+import io.daff.web.entity.R;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserProvider {
 
     @RequestMapping("/hello")
-    public Response<String> hello() {
-        return Response.ok("hi");
+    public R<String> hello() {
+        return R.ok("hi");
     }
 }

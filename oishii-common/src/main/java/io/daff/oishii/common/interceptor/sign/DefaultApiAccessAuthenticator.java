@@ -1,7 +1,7 @@
 package io.daff.oishii.common.interceptor.sign;
 
 import io.daff.oishii.common.interceptor.sign.secret.SecretStorage;
-import io.daff.web.exception.ParamValidateException;
+import io.daff.web.exception.BizLogicException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,18 +27,18 @@ public class DefaultApiAccessAuthenticator implements ApiAccessAuthenticator {
 
         // 重放攻击验证
         if (signature.replay()) {
-            throw new ParamValidateException("接口调用已过期");
+            throw new BizLogicException("接口调用已过期");
         }
 
         // 取密钥
         String secret = secretStorage.getSecretByAppCode(signature.getAppCode());
         if (secret == null) {
-            throw new ParamValidateException("无效的appcode");
+            throw new BizLogicException("无效的appcode");
         }
 
         // 验签
         if (!signature.verify(secret)) {
-            throw new ParamValidateException("签名不合法");
+            throw new BizLogicException("签名不合法");
         }
     }
 }

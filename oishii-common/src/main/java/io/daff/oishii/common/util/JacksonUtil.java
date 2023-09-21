@@ -11,8 +11,9 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import io.daff.logging.DaffLogger;
 import io.daff.logging.module.InnerModule;
-import io.daff.web.enums.Hint;
+import io.daff.web.enums.GenericHint;
 import io.daff.web.exception.BaseException;
+import io.daff.web.exception.ServerException;
 import org.springframework.util.StringUtils;
 
 import java.text.SimpleDateFormat;
@@ -34,7 +35,7 @@ public class JacksonUtil {
             return JacksonConfig.fromBean(bean);
         } catch (JsonProcessingException e) {
             log.error("jackson序列化错误", InnerModule.INNER, e);
-            throw new BaseException(Hint.SYSTEM_ERROR);
+            throw new ServerException(GenericHint.ERROR.msg());
         }
     }
 
@@ -43,7 +44,7 @@ public class JacksonUtil {
             return JacksonConfig.toBean(json, typeReference);
         } catch (JsonProcessingException e) {
             log.error("jackson序列化错误", InnerModule.INNER, e);
-            throw new BaseException(Hint.SYSTEM_ERROR);
+            throw new ServerException(GenericHint.ERROR.msg());
         }
     }
 
@@ -52,7 +53,7 @@ public class JacksonUtil {
             return JacksonConfig.toBean(json, clazz);
         } catch (JsonProcessingException e) {
             log.error("jackson序列化错误", InnerModule.INNER, e);
-            throw new BaseException(Hint.SYSTEM_ERROR);
+            throw new ServerException(GenericHint.ERROR.msg());
         }
     }
 

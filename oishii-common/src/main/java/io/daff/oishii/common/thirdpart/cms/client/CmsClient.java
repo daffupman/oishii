@@ -2,7 +2,7 @@ package io.daff.oishii.common.thirdpart.cms.client;
 
 import io.daff.oishii.common.thirdpart.cms.CmsBuilder;
 import io.daff.oishii.common.thirdpart.cms.resp.AppInfoVO;
-import io.daff.web.entity.Response;
+import io.daff.web.entity.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,5 +18,5 @@ import java.util.List;
 public interface CmsClient {
 
     @GetMapping("/app/list")
-    Response<List<AppInfoVO>> listAppInfoList();
+    R<List<AppInfoVO>> listAppInfoList();
 }

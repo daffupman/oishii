@@ -3,8 +3,8 @@ package io.daff.oishii.common.interceptor.sign.secret;
 import io.daff.oishii.common.cache.AppInfoLoader;
 import io.daff.oishii.common.thirdpart.cms.resp.AppInfoVO;
 import io.daff.utils.common.StringUtil;
-import io.daff.web.enums.Hint;
-import io.daff.web.exception.BaseException;
+import io.daff.web.exception.BizLogicException;
+import io.daff.web.exception.ServerException;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +26,7 @@ public class HttpSecretStorage implements SecretStorage {
     @Override
     public String getSecretByAppCode(String appCode) {
         if (!appInfoLoader.finish()) {
-            throw new BaseException(Hint.DATA_UNAVAILABLE, "数据还未加载完成，请稍后重试");
+            throw new ServerException("数据还未加载完成，请稍后重试");
         }
         if (!StringUtil.hasText(appCode)) {
             return Strings.EMPTY;

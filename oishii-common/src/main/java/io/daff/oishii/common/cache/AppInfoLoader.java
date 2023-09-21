@@ -5,9 +5,9 @@ import io.daff.logging.module.InnerModule;
 import io.daff.oishii.common.enums.BaseModule;
 import io.daff.oishii.common.thirdpart.cms.client.CmsClient;
 import io.daff.oishii.common.thirdpart.cms.resp.AppInfoVO;
-import io.daff.web.entity.Response;
-import io.daff.web.enums.Hint;
-import io.daff.web.exception.BaseException;
+import io.daff.web.entity.R;
+import io.daff.web.enums.GenericHint;
+import io.daff.web.exception.ServerException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -45,11 +45,11 @@ public class AppInfoLoader extends AbstractBizDataLoader<String, AppInfoVO> {
     protected Map<String, AppInfoVO> doLoad() {
         Map<String, AppInfoVO> newMap = new HashMap<>();
         try {
-            Response<List<AppInfoVO>> listResponse = cmsClient.listAppInfoList();
-            if (!Objects.equals(Hint.SUCCESS.code(), listResponse.getCode())) {
-                throw new BaseException(Hint.SYSTEM_ERROR, listResponse.getMsg());
+            R<List<AppInfoVO>> listResponse = cmsClient.listAppInfoList();
+            if (!Objects.equals(GenericHint.SUCCESS.code(), listResponse.code())) {
+                throw new ServerException(listResponse.msg());
             }
-            newMap = listResponse.getData().stream().collect(Collectors.toConcurrentMap(AppInfoVO::getCode, appInfoVO -> appInfoVO));
+            newMap = listResponse.data().stream().collect(Collectors.toConcurrentMap(AppInfoVO::getCode, appInfoVO -> appInfoVO));
             logger.info("local data => client load success!", InnerModule.CACHE);
             loaded();
         } catch (Exception e) {

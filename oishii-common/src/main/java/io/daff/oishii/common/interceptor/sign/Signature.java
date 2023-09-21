@@ -2,7 +2,7 @@ package io.daff.oishii.common.interceptor.sign;
 
 import io.daff.utils.common.StringUtil;
 import io.daff.utils.crypto.Md5Util;
-import io.daff.web.exception.ParamValidateException;
+import io.daff.web.exception.BizLogicException;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Comparator;
@@ -51,7 +51,7 @@ public class Signature {
     public boolean verify(String secret) {
 
         if (secret == null) {
-            throw new ParamValidateException("密钥不合法");
+            throw new BizLogicException("密钥不合法");
         }
 
         TreeMap<String, Object> allParams = new TreeMap<>();
@@ -138,13 +138,13 @@ public class Signature {
 
         public Signature build() {
             if (!Objects.equals(debug, true) && !StringUtil.hasText(appCode)) {
-                throw new ParamValidateException("appcode is null");
+                throw new BizLogicException("appcode is null");
             }
             if (!Objects.equals(debug, true) && timestamp == null) {
-                throw new ParamValidateException("timestamp is null");
+                throw new BizLogicException("timestamp is null");
             }
             if (!Objects.equals(debug, true) && !StringUtil.hasText(rawSignature)) {
-                throw new ParamValidateException("signature is null");
+                throw new BizLogicException("signature is null");
             }
             return new Signature(this);
         }

@@ -1,7 +1,8 @@
 package io.daff.oishii.common.context;
 
 
-import io.daff.web.entity.Response;
+
+import io.daff.web.entity.R;
 
 import java.io.Serializable;
 
@@ -12,13 +13,13 @@ import java.io.Serializable;
 @SuppressWarnings("rawtypes")
 public class ApiBodyContext implements Serializable {
 
-    private static final ThreadLocal<Response> apiBodyThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<R> apiBodyThreadLocal = new ThreadLocal<>();
 
-    public static Response get() {
+    public static R get() {
         return apiBodyThreadLocal.get();
     }
 
-    public static void set(Response apiBody) {
+    public static void set(R apiBody) {
         apiBodyThreadLocal.set(apiBody);
     }
 

@@ -7,7 +7,7 @@
 
 所有模块均为web项目。
 - oishii-common：所有模块的公共模块
-- oishii-cms：后台配置端
+- oishii-console：后台配置端
 - oishii-member：开放用户端
 
 ## 一些约定
