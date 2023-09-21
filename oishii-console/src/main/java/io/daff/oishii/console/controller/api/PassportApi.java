@@ -4,7 +4,6 @@ import io.daff.oishii.console.entity.param.SignInParam;
 import io.daff.oishii.console.entity.vo.SignInVO;
 import io.daff.oishii.console.service.PassportService;
 import io.daff.web.entity.R;
-import io.daff.web.entity.Response;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

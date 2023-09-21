@@ -3,7 +3,7 @@ package io.daff.oishii.console.interceptor;
 import io.daff.logging.DaffLogger;
 import io.daff.oishii.console.util.SimpleRedisUtil;
 import io.daff.utils.common.StringUtil;
-import io.daff.web.exception.BusinessException;
+import io.daff.web.exception.BizLogicException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -29,10 +29,10 @@ public class PassportInterceptor extends HandlerInterceptorAdapter {
         String userCode = request.getHeader("userCode");
         String token = request.getHeader("token");
         if (StringUtil.isEmpty(userCode) || StringUtil.isEmpty(token)) {
-            throw new BusinessException("用户未登录");
+            throw new BizLogicException("用户未登录");
         }
         if (!simpleRedisUtil.hexist(LOGIN_TOKENS, userCode)) {
-            throw new BusinessException("请重新登录");
+            throw new BizLogicException("请重新登录");
         }
 
         return true;
